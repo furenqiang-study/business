@@ -4,7 +4,10 @@ import com.furenqiang.business.entity.BrandEntity;
 import com.furenqiang.business.service.BrandService;
 import com.furenqiang.business.utils.PageUtils;
 import com.furenqiang.business.utils.R;
+import com.furenqiang.business.valid.AddGroup;
+import com.furenqiang.business.valid.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -45,7 +48,7 @@ public class BrandController {
     @RequestMapping("/info/{brandId}")
     //@RequiresPermissions("business:brand:info")
     public R info(@PathVariable("brandId") Long brandId){
-		BrandEntity brand = brandService.getById(brandId);
+        BrandEntity brand = brandService.getById(brandId);
 
         return R.ok().put("brand", brand);
     }
@@ -55,8 +58,8 @@ public class BrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("business:brand:save")
-    public R save(@RequestBody BrandEntity brand){
-		brandService.save(brand);
+    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand){
+        brandService.save(brand);
 
         return R.ok();
     }
@@ -66,8 +69,8 @@ public class BrandController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("business:brand:update")
-    public R update(@RequestBody BrandEntity brand){
-		brandService.updateById(brand);
+    public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand){
+        brandService.updateById(brand);
 
         return R.ok();
     }
@@ -78,7 +81,7 @@ public class BrandController {
     @RequestMapping("/delete")
     //@RequiresPermissions("business:brand:delete")
     public R delete(@RequestBody Long[] brandIds){
-		brandService.removeByIds(Arrays.asList(brandIds));
+        brandService.removeByIds(Arrays.asList(brandIds));
 
         return R.ok();
     }
