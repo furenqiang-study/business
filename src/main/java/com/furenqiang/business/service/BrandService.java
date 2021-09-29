@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.furenqiang.business.utils.PageUtils;
 import com.furenqiang.business.entity.BrandEntity;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface BrandService extends IService<BrandEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    boolean upBrand(Long brandId) throws IOException;
 }
 

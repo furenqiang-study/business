@@ -2,10 +2,9 @@ package com.furenqiang.business.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * 品牌分类关联
@@ -36,9 +35,13 @@ public class CategoryBrandRelationEntity implements Serializable {
 	 * 
 	 */
 	private String brandName;
-	/**
-	 * 
-	 */
-	private String catelogName;
+    /**
+     *
+     */
+    private String catelogName;
+    /**
+     * 上架状态 0-下架 1-上架
+     */
+    private int upStatus;
 
 }

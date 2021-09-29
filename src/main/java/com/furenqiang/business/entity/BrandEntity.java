@@ -1,5 +1,6 @@
 package com.furenqiang.business.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.furenqiang.business.valid.AddGroup;
@@ -56,5 +57,10 @@ public class BrandEntity implements Serializable {
      * 排序
      */
     private Integer sort;
+    /**
+     * 上架状态
+     */
+    @TableField(exist = false)
+    private Integer upStatus;
 
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -29,6 +30,20 @@ import java.util.Map;
 public class BrandController {
     @Autowired
     private BrandService brandService;
+
+    /**
+     * 商品上架（将信息存ES）
+     */
+    @PostMapping("/{brandId}/up")
+    //@RequiresPermissions("business:brand:list")
+    public R upBrand(@PathVariable Long brandId) throws IOException {
+        boolean b = brandService.upBrand(brandId);
+        if (b) {
+            return R.ok();
+        } else{
+            return R.error();
+        }
+    }
 
     /**
      * 列表
