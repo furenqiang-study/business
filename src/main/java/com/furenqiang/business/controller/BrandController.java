@@ -17,7 +17,6 @@ import java.util.Map;
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 
-
 /**
  * 品牌
  *
@@ -34,13 +33,23 @@ public class BrandController {
     /**
      * 商品上架（将信息存ES）
      */
+    @GetMapping("/testSentinel")
+    //@RequiresPermissions("business:brand:list")
+//    @SentinelResource(value = "",blockHandler = "")
+    public R testSentinel() throws IOException {
+        return R.ok();
+    }
+
+    /**
+     * 商品上架（将信息存ES）
+     */
     @PostMapping("/{brandId}/up")
     //@RequiresPermissions("business:brand:list")
     public R upBrand(@PathVariable Long brandId) throws IOException {
         boolean b = brandService.upBrand(brandId);
         if (b) {
             return R.ok();
-        } else{
+        } else {
             return R.error();
         }
     }
@@ -50,7 +59,7 @@ public class BrandController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("business:brand:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = brandService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -62,7 +71,7 @@ public class BrandController {
      */
     @RequestMapping("/info/{brandId}")
     //@RequiresPermissions("business:brand:info")
-    public R info(@PathVariable("brandId") Long brandId){
+    public R info(@PathVariable("brandId") Long brandId) {
         BrandEntity brand = brandService.getById(brandId);
 
         return R.ok().put("brand", brand);
@@ -73,7 +82,7 @@ public class BrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("business:brand:save")
-    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand){
+    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand) {
         brandService.save(brand);
 
         return R.ok();
@@ -84,7 +93,7 @@ public class BrandController {
      */
     @RequestMapping("/update")
     //@RequiresPermissions("business:brand:update")
-    public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand){
+    public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand) {
         brandService.updateById(brand);
 
         return R.ok();
@@ -95,7 +104,7 @@ public class BrandController {
      */
     @RequestMapping("/delete")
     //@RequiresPermissions("business:brand:delete")
-    public R delete(@RequestBody Long[] brandIds){
+    public R delete(@RequestBody Long[] brandIds) {
         brandService.removeByIds(Arrays.asList(brandIds));
 
         return R.ok();
